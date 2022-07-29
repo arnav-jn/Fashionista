@@ -409,13 +409,13 @@ def api_futuretrends():
         top1_score = []
 
         images_path = []
-        imagestshirts = glob.glob('static/img/future_trends/shirt+' + '*.jpeg')
+        imagestshirts = glob.glob('static/img/future_trends/skirt+' + '*.jpeg')
         for i in range(0, len(imagestshirts)):
             images_path.append(imagestshirts[i])
 
         colnames = ['id', 'tag', 'score', '0']
         reqdcolnames = ['tag', 'score', '0']
-        dataset_csv = pd.read_csv('csv-data/future_trends/tshirts.csv', names=colnames, delimiter=',',
+        dataset_csv = pd.read_csv('csv-data/future_trends/skirts.csv', names=colnames, delimiter=',',
                                   error_bad_lines=False,
                                   header=None, usecols=reqdcolnames, na_values=" NaN")
         dataset_csv2 = dataset_csv.dropna()

@@ -1,10 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Fashionista</title>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+
+
+
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -57,7 +63,7 @@ body {
 }
 
 /* Column container */
-.row {  
+.row {
   display: -ms-flexbox; /* IE10 */
   display: flex;
   -ms-flex-wrap: wrap; /* IE10 */
@@ -66,7 +72,7 @@ body {
 
 
 /* Main column */
-.main {   
+.main {
   -ms-flex: 100%; /* IE10 */
   flex: 100%;
   background-color: #fcfbf1;
@@ -74,19 +80,9 @@ body {
 }
 
 
-
-/* Footer */
-.footer {
--ms-flex: 100%; /* IE10 */
-  flex: 100%;
-  padding: 20px;
-  text-align: center;
-  background: #dbe4d2;
-}
-
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {
-  .row {   
+  .row {
     flex-direction: column;
   }
 }
@@ -121,16 +117,9 @@ html {
   padding: 0 8px;
 }
 
-.columninsp {
-  float: left;
-  width: 33.33%;
-  margin-bottom: 16px;
-  padding: 0 8px;
-}
-
 .columngraph {
 margin:auto;
-  width: 65%;
+  width: 80%;
   margin-bottom: auto;
   padding: 0 8px;
 }
@@ -174,23 +163,9 @@ margin:auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  width: 50%;
   padding: 10px;
 }
-.maingraph {   
-  -ms-flex: 100%; /* IE10 */
-  flex: 100%;
-  background-color: white;
-  height: 550px;
-  padding: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-
-
-
-
 
 text {
   font: 10px sans-serif;
@@ -198,33 +173,9 @@ text {
 
 button{
   font: 10px sans-serif;
-    
+
 }
 
-rect.background {
-  fill: white;
-  stroke: #646464;
-  stroke-width: 1px;
-  stroke-dasharray: 2,2;
-  stroke-linejoin: round;
-}
-
-.axis {
-  shape-rendering: crispEdges;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-}
-
-.left-div {
-  float:left;
-  height: 550px;
-  width: 820px;
-  
-}
 
 </style>
 
@@ -232,92 +183,77 @@ rect.background {
     	<div class="header">
           <h1></h1>
         </div>
-        
+
         <div class="navbar">
           <a href="home?">Home</a>
           <a href="aboutus?">Meet the Team</a>
           <a href="downloadcode?">Download Code</a>
 <!--          <a href="contactus?" class="right">Contact Us</a>-->
         </div>
-        
+
         <div class="main">
-            <h2 style="text-align:center">GENERATED FUTURE TRENDS</h2>
-            <h5 style="text-align:center">Refresh to load more generated trends!</h5>
+            <h2 style="text-align:center">Future Trend Leaderboard</h2>
             <div class="row" style="align:center">
               <div class="column">
                 <div class="card">
                   <img src={{ images_path[0] }} alt="TOPTREND1" class="centerimg">
                   <div class="container">
+<!--                    <h2>TOP TREND #1</h2>-->
+                    <p class="title">{{ top1_name[0] }}</p>
+                    <a href={{ top1_description[0] }}>Link</a>
+                    <p> Score: {{ top1_score[0] }} </p>
                   </div>
                 </div>
               </div>
-            
+
               <div class="column">
                 <div class="card">
-                  <img src={{ images_path[1] }} alt="TOPTREND1" class="centerimg">
+                  <img src={{ images_path[1] }} alt="TOPTREND2" class="centerimg">
                   <div class="container">
+                    <h2>TOP TREND #2</h2>
+                    <p class="title">{{ top1_name[1] }}</p>
+                    <a href={{ top1_description[1] }}>Link</a>
+                    <p> Score: {{ top1_score[1] }} </p>
                   </div>
                 </div>
               </div>
-              <div class="column">
+
+            <div class="column">
                 <div class="card">
-                  <img src={{ images_path[2] }} alt="TOPTREND1" class="centerimg">
+                  <img src={{ images_path[2] }} alt="TOPTREND3" class="centerimg">
                   <div class="container">
+                    <h2>TOP TREND #3</h2>
+                    <p class="title">{{ top1_name[2] }}</p>
+                    <a href={{ top1_description[2] }}>Link</a>
+                    <p> Score: {{ top1_score[2] }} </p>
                   </div>
                 </div>
               </div>
+
               <div class="column">
                 <div class="card">
-                  <img src={{ images_path[3] }} alt="TOPTREND1" class="centerimg">
+                  <img src={{ images_path[3] }} alt="TOPTREND4" class="centerimg">
                   <div class="container">
+                    <h2>TOP TREND #4</h2>
+                    <p class="title">{{ top1_name[3] }}</p>
+                    <a href={{ top1_description[3] }}>Link</a>
+                    <p> Score: {{ top1_score[3] }} </p>
                   </div>
                 </div>
               </div>
+
               <div class="column">
                 <div class="card">
-                  <img src={{ images_path[4] }} alt="TOPTREND1" class="centerimg">
+                  <img src={{ images_path[4] }} alt="TOPTREND5" class="centerimg">
                   <div class="container">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row" style="align:center">
-              <div class="column">
-                <div class="card">
-                  <img src={{ images_path[5] }} alt="TOPTREND1" class="centerimg">
-                  <div class="container">
-                  </div>
-                </div>
-              </div>
-            
-              <div class="column">
-                <div class="card">
-                  <img src={{ images_path[6] }} alt="TOPTREND2" class="centerimg">
-                  <div class="container">
-                  </div>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <img src={{ images_path[7] }} alt="TOPTREND3" class="centerimg">
-                  <div class="container">
-                  </div>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <img src={{ images_path[8] }} alt="TOPTREND4" class="centerimg">
-                  <div class="container">
-                  </div>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <img src={{ images_path[9] }} alt="TOPTREND5" class="centerimg">
-                  <div class="container">
+                    <h2>TOP TREND #5</h2>
+                    <p class="title">{{ top1_name[4] }}</p>
+                    <a href={{ top1_description[4] }}>Link</a>
+                    <p> Score: {{ top1_score[4] }} </p>
                   </div>
                 </div>
               </div>
             </div>
         </div>
-	</body>
+</body>
+</html>

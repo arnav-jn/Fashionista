@@ -352,25 +352,30 @@ def returnProdDatacurrenttrends3():
 @app.route('/futuretrends', methods=['GET'])
 def api_futuretrends():
     if 'tshirts' in request.args:
-        #        Insert code here/ information to retrieve
         top1_name = []
         top1_description = []
-        for i in range(0, 10):
-            top1_name.append("name" + str(i + 1))
-            top1_description.append("description" + str(i + 1))
-        imagestshirts = glob.glob('static/img/tshirt_images/generated' + '*.png')
-        imgs_id = random.sample(range(0, len(imagestshirts)), 10)
-        images_path = []
-        for i in range(0, len(imgs_id)):
-            images_path.append(imagestshirts[imgs_id[i]])
+        top1_score = []
 
-        imagestshirts2 = glob.glob('static/img/content/outputs/output_shirt-' + '*.*')
-        images_path_insp = []
-        for i in range(0, len(imagestshirts2)):
-            images_path_insp.append(imagestshirts2[i])
-        #        print(images_path)
-        return render_template("website_futuretrends.html", images_path_insp=images_path_insp, images_path=images_path,
-                               top1_name=top1_name, top1_description=top1_description)
+        images_path = []
+        imagestshirts = glob.glob('static/img/future_trends/shirt+' + '*.jpeg')
+        for i in range(0, len(imagestshirts)):
+            images_path.append(imagestshirts[i])
+
+        colnames = ['id', 'tag', 'score', '0']
+        reqdcolnames = ['tag', 'score', '0']
+        dataset_csv = pd.read_csv('csv-data/future_trends/tshirts.csv', names=colnames, delimiter=',',
+                                  error_bad_lines=False,
+                                  header=None, usecols=reqdcolnames, na_values=" NaN")
+        dataset_csv2 = dataset_csv.dropna()
+        for i in range(1, 6):
+            top1_name.append(dataset_csv2['tag'][i])
+            top1_description.append(dataset_csv2['0'][i])
+            top1_score.append(dataset_csv2['score'][i])
+
+        return render_template("website_futuretrends.html", images_path=images_path, top1_name=top1_name, top1_description=top1_description,
+                               top1_score=top1_score)
+
+
 
     if 'dresses' in request.args:
         #        Insert code here/ information to retrieve

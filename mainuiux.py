@@ -443,12 +443,6 @@ def api_aboutus():
 def api_downloadcode():
     return render_template("website_downloadcode.html")
 
-
-# @app.route('/contactus', methods=['GET'])
-# def api_contactus():
-#     return render_template("website_contactus.html")
-
-
 app.run()
 
 

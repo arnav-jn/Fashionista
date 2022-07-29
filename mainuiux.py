@@ -378,46 +378,55 @@ def api_futuretrends():
 
 
     if 'dresses' in request.args:
-        #        Insert code here/ information to retrieve
         top1_name = []
         top1_description = []
-        for i in range(0, 10):
-            top1_name.append("name" + str(i + 1))
-            top1_description.append("description" + str(i + 1))
-        imagesdresses = glob.glob('static/img/dress_images/generated' + '*.png')
-        imgs_id = random.sample(range(0, len(imagesdresses)), 10)
-        images_path = []
-        for i in range(0, len(imgs_id)):
-            images_path.append(imagesdresses[imgs_id[i]])
+        top1_score = []
 
-        imagestshirts2 = glob.glob('static/img/content/outputs/output_dress-' + '*.*')
-        images_path_insp = []
-        for i in range(0, len(imagestshirts2)):
-            images_path_insp.append(imagestshirts2[i])
-        #        print(images_path)
-        return render_template("website_futuretrends.html", images_path_insp=images_path_insp, images_path=images_path,
-                               top1_name=top1_name, top1_description=top1_description)
+        images_path = []
+        imagestshirts = glob.glob('static/img/future_trends/dress+' + '*.jpeg')
+        for i in range(0, len(imagestshirts)):
+            images_path.append(imagestshirts[i])
+
+        colnames = ['id', 'tag', 'score', '0']
+        reqdcolnames = ['tag', 'score', '0']
+        dataset_csv = pd.read_csv('csv-data/future_trends/dresses.csv', names=colnames, delimiter=',',
+                                  error_bad_lines=False,
+                                  header=None, usecols=reqdcolnames, na_values=" NaN")
+        dataset_csv2 = dataset_csv.dropna()
+        for i in range(1, 6):
+            top1_name.append(dataset_csv2['tag'][i])
+            top1_description.append(dataset_csv2['0'][i])
+            top1_score.append(dataset_csv2['score'][i])
+
+        return render_template("website_futuretrends.html", images_path=images_path, top1_name=top1_name,
+                               top1_description=top1_description,
+                               top1_score=top1_score)
+
 
     if 'skirts' in request.args:
-        #        Insert code here/ information to retrieve
         top1_name = []
         top1_description = []
-        for i in range(0, 10):
-            top1_name.append("name" + str(i + 1))
-            top1_description.append("description" + str(i + 1))
-        imagesskirts = glob.glob('static/img/skirt_images/generated' + '*.png')
-        imgs_id = random.sample(range(0, len(imagesskirts)), 10)
-        images_path = []
-        for i in range(0, len(imgs_id)):
-            images_path.append(imagesskirts[imgs_id[i]])
+        top1_score = []
 
-        imagestshirts2 = glob.glob('static/img/content/outputs/output_skirt-' + '*.*')
-        images_path_insp = []
-        for i in range(0, len(imagestshirts2)):
-            images_path_insp.append(imagestshirts2[i])
-        #        print(images_path)
-        return render_template("website_futuretrends.html", images_path_insp=images_path_insp, images_path=images_path,
-                               top1_name=top1_name, top1_description=top1_description)
+        images_path = []
+        imagestshirts = glob.glob('static/img/future_trends/shirt+' + '*.jpeg')
+        for i in range(0, len(imagestshirts)):
+            images_path.append(imagestshirts[i])
+
+        colnames = ['id', 'tag', 'score', '0']
+        reqdcolnames = ['tag', 'score', '0']
+        dataset_csv = pd.read_csv('csv-data/future_trends/tshirts.csv', names=colnames, delimiter=',',
+                                  error_bad_lines=False,
+                                  header=None, usecols=reqdcolnames, na_values=" NaN")
+        dataset_csv2 = dataset_csv.dropna()
+        for i in range(1, 6):
+            top1_name.append(dataset_csv2['tag'][i])
+            top1_description.append(dataset_csv2['0'][i])
+            top1_score.append(dataset_csv2['score'][i])
+
+        return render_template("website_futuretrends.html", images_path=images_path, top1_name=top1_name,
+                               top1_description=top1_description,
+                               top1_score=top1_score)
 
 
 @app.route('/home', methods=['GET'])

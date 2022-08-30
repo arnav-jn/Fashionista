@@ -1,6 +1,6 @@
 # Fashionista
 
-##Abstract:
+## Abstract:
 
 We begin by scraping the Flipkart website to acquire product information such as T-shirts, 
 dresses, and skirts. We then assign a score to each of these items based on the number of 
